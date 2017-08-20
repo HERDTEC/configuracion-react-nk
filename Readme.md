@@ -1,4 +1,7 @@
 # NKrgo Web
+## Consideraciones
+*  React.PropTypes  Desde la version 15.5 ha sido movido a un diferente paquete, por lo tanto usar la siguiente linea para importarlo: `import PropTypes from 'prop-types'`
+
 ## Buenas Practicas
 * `Separar desde el inicio los componentes con estado y sin estado`
 * `Hacer componente mas pequenios`

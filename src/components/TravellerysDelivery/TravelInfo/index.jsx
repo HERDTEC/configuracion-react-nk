@@ -1,7 +1,11 @@
 import React from 'react'
-const TravelInfo = (props) => (
+const TravelInfo = ( props ) => (
   <div>
-    <li>{props.usuario.name}</li>
+    <li>
+      <div>
+        { props.ciudadOrigen }
+      </div>
+    </li>
   </div>
 )
 export default TravelInfo

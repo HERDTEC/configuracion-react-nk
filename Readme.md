@@ -3,11 +3,12 @@
 *  React.PropTypes  Desde la version 15.5 ha sido movido a un diferente paquete, por lo tanto usar la siguiente linea para importarlo: `import PropTypes from 'prop-types'`
 
 ## Buenas Practicas
-* `Separar desde el inicio los componentes con estado y sin estado`
-* `Hacer componente mas pequenios`
-* `En la medida de lo posible tener pocos componentes con estado por el tema de renderizacion por cambio de estado`
-* `Hacer el autobiding`
-* `Los eventos se nombran con camelCase`
+* Separar desde el inicio los componentes con estado y sin estado
+* Hacer componente lo mas atomicos posibles
+* En la medida de lo posible tener pocos componentes con estado por el tema de renderizacion por cambio de estado
+* Hacer el `autobiding`
+* Los eventos se nombran con `camelCase`
+* Al mometo de traer datos de formulario no olvidar especificar que se requiere el `value` de los nombres de los campos, caso contrario habra un error.
 
 ## Creacion de proyecto
 1. Instalar generador de codigo oficial
@@ -162,7 +163,43 @@ Es una pieza de código que se dedica a resolver una tarea
   + Orientados al funcionamiento de la aplcacion
   + Se comunican con las fuentes de datos
   + Contienen componentes de presentacion y otros contenedores
-#### Tipos de componente
+#### Ciclo de vida de los componentes
+1. Montaje
+  * geDeafaultProps
+  * getInitialState
+  * componentWillMount:
+    
+    _Ejecuta el primero que se ejecuta antes del primer render. Si usas `setState` en este metodo, `render()` se ejecutara solo una vez a pesar de haber disparado un cambio de estado_
+
+  * render
+  * componentDidMount
+
+      _Ejecuta solo una vez, inmediatamente despues de primer `render()`, Es el lugar adecuado para hacer `peticiones AJAX, integrar librerias externas, crear eventos, poner timers...`_
+
+      _El componenDidMount() de los hijos seran ejecutados antes que el de los padres_
+
+2. Actualizacion
+  * componentWillReceiveProps
+
+    _Se ejecuta cuando el componente reciba nuevas propiedades. No se ejecuta con el primer render_
+    
+    _`Dentro de esta funcion no se debe cambiar de estado por que se genera un ciclo infinito`_
+
+  * shouldComponentUpdate
+     _Se ejecuta antes de volver a renderizarse con la nuevas props del estado_
+
+  * componentWillUpdate
+  * render
+  * ComponentDidUpdate
+
+    _Se ejecuta despues de renderizarse. Es un buen lugar para trabajar con el `DOM`. `Los datos del estado anterior aun estan disponibles`_
+
+3. Desmontaje
+  * ComponentWillUmont
+     
+    _Se ejecuta antes  que el componente se elimine del DOM `Es Util para limpiar eventos asignados a las referecias del DOM del componente, eliminar timers y limpiar observables`_
+
+#### Declaracion Tipos de componente
 * Sintaxis ES6
 
 ```

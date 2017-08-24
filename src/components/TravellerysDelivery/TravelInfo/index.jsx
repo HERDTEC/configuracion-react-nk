@@ -3,7 +3,7 @@ const TravelInfo = ( props ) => (
   <div>
     <li>
       <div>
-        { props.ciudadOrigen }
+        { props.hometown }
       </div>
     </li>
   </div>

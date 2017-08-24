@@ -57,6 +57,7 @@
 
     "react/prop-types": 0,//-variables props 
     "react/no-unused-prop-types":0,
+    "react/jsx-boolean-value":0,
 
 
     "comma-spacing": ["error", { "before": false, "after": true }],

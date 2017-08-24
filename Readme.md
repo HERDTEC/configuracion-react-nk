@@ -199,6 +199,23 @@ Es una pieza de código que se dedica a resolver una tarea
      
     _Se ejecuta antes  que el componente se elimine del DOM `Es Util para limpiar eventos asignados a las referecias del DOM del componente, eliminar timers y limpiar observables`_
 
+#### Componentes Dinamicos
+ Componentes hijos que reciben cambios desde el componente padre con estado
+* Ventajas
+  + Indicar que estamos cargando de contenido
+  + Un componente para cuando no tenemos resultados
+  + Generar una lista de componentes
+
+#### Anidamiento de vistas
+Se anidan componentes los cuales tienen funcionalidades definidas
+* Ventajas
+  + Codigo mas limpio
+  + Reutilizar al maximo codigo posible.
+  + Convertir estructuras complejas en mas sencillas y reutilizables.
+
+#### Encapsulamiento de librerias
+Se puede utilizar librerias Javascript y conviertelos en componentes
+
 #### Declaracion Tipos de componente
 * Sintaxis ES6
 

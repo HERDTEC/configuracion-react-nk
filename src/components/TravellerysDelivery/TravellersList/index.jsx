@@ -7,10 +7,10 @@ const TravellersList = props => (
         <TravelInfo
           key = { travel.id }
           id = { travel.id }
-          usuario = { travel.usuario }
-          ciudadOrigen = { travel.ciudadOrigen }
-          fechaSalida = { travel.fechaSalida }
-          fechaRetorno = { travel.fechaRetorno }
+          user = { travel.user }
+          hometown = { travel.hometown }
+          departureDate = { travel.departureDate }
+          returnDate = { travel.returnDate }
         />
       ) )
     }

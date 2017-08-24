@@ -2,89 +2,66 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import TravellersList from './TravellerysDelivery/TravellersList'
 import TravelNew from './TravellerysDelivery/TravelNew/'
+import uid from 'uid'
+import { travellersDelivery } from './../data/travellersDelivery.json'
+import moment from 'moment'
 class App extends Component {
   static defaultProps = {
-    ciudadOrigen: 'defecto',
-    fechaSalida: '1/1/1',
-    fechaRetorno: '1/1/1'
+    id: uid( 10 ),
+    hometown: 'defecto',
+    returnDate: moment(),
+    departureDate: moment()
   }
   static propTypes = {
-    ciudadOrigen: PropTypes.string.isRequired,
-    fechaSalida: PropTypes.string.isRequired,
-    fechaRetorno: PropTypes.string.isRequired
+    id: PropTypes.string.isRequired,
+    hometown: PropTypes.string.isRequired,
+    departureDate: PropTypes.instanceOf( moment ),
+    returnDate: PropTypes.instanceOf( moment )
   }
   constructor ( ...props ) {
     super( ...props )
     this.handleOnAddTravel = this.handleOnAddTravel.bind( this )
+    this.fetchData = this.fetchData.bind( this )
+    this.resetData = this.resetData.bind( this )
+    this.handleChangeDepartureDate = this.handleChangeDepartureDate.bind( this )
+    this.handleChangeReturnDate = this.handleChangeReturnDate.bind( this )
   }
   state = {
-    travellersDelivery: [
-      {
-        id: 0,
-        usuario: {
-          name: 'Juan Carlos',
-          apellido: 'Hinojosa Raza',
-          cedula: '17282444323',
-          calificacion: {
-            puntualidad: '10',
-            promedioPuntuaciones: '10'
-          }
-        },
-        ruta: [
-          {
-            ciudad: 'Francia',
-            fechaLlegada: '2017/10/8',
-            fechaSalida: '2017/10/15'
-          },
-          {
-            ciudad: 'Espania',
-            fechaLlegada: '2018/12/16',
-            fechaSalida: '2018/12/29'
-          }
-        ],
-        ciudadOrigen: 'Quito2',
-        fechaSalida: '2017/10/7',
-        fechaRetorno: '2017/10/30'
-      },
-      {
-        id: 1,
-        usuario: {
-          name: 'Juan Carlos',
-          apellido: 'Hinojosa Raza',
-          cedula: '17282444323',
-          calificacion: {
-            puntualidad: '10',
-            promedioPuntuaciones: '10'
-          }
-        },
-        ruta: [
-          {
-            ciudad: 'Francia',
-            fechaLlegada: '2017/10/8',
-            fechaSalida: '2017/10/15'
-          },
-          {
-            ciudad: 'Espania',
-            fechaLlegada: '2018/12/16',
-            fechaSalida: '2018/12/29'
-          }
-        ],
-        ciudadOrigen: 'Guayaquil',
-        fechaSalida: '2017/10/7',
-        fechaRetorno: '2017/10/30'
-      }
-    ]
+    travellersDelivery: [],
+    departureDate: null,
+    returnDate: null
   }
+  fetchData ( ) {
+    setTimeout( () => this.setState( { travellersDelivery: travellersDelivery } ), 2000 )
+  }
+  resetData () {
+    this.setState( { travellersDelivery: [] } )
+  }
+  componentDidMount () {
+    this.fetchData()
+    // this.handleChangeDepartureDate( moment() )
+    // this.handleChangereturnDate( moment() )
+  }
+  handleChangeDepartureDate ( date ) {
+    this.setState( {
+      departureDate: date
+    } )
+  }
+  handleChangeReturnDate ( date ) {
+    this.setState( {
+      returnDate: date
+    } )
+  }
+
   handleOnAddTravel ( e ) {
-    // alert( 'Evento en react' )
     e.preventDefault()
     console.log( e.target )
     let form = e.target,
       travel = {
         id: form.id.value,
-        ciudadOrigen: ( form.ciudadOrigen.value ) ? form.ciudadOrigen.value : App.defaultProps.ciudadOrigen,
-        fechaSalida: ( form.fechaSalida.value ) ? form.fechaSalida.value : App.defaultProps.fechaSalida,
-        fechaRetorno: ( form.fechaRetorno.value ) ? form.fechaRetorno.value : App.defaultProps.fechaRetorno
+        hometown: ( form.hometown.value ) ? form.hometown.value : App.defaultProps.hometown,
+        departureDate: ( form.departureDate.value ) ? form.departureDate.value : App.defaultProps.departureDate,
+        returnDate: ( form.returnDate.value ) ? form.returnDate.value : App.defaultProps.returnDate
       }
     console.log( travel )
     this.setState( {
@@ -92,12 +69,30 @@ class App extends Component {
     } )
   }
   render () {
-    return (
-      <div>
-        <TravelNew onAddTravel = { this.handleOnAddTravel } />
-        <TravellersList travellers = { this.state.travellersDelivery } />
-      </div>
-    )
+    if ( !this.state.travellersDelivery.length ) {
+      return (
+        <div>
+          <p>No hay viajeros</p>
+          <button onClick = { this.fetchData }>Cargar Viajeros</button>
+        </div>
+      )
+    } else {
+      return (
+        <div>
+          <TravelNew
+            onAddTravel = { this.handleOnAddTravel }
+            departureDate = { this.state.departureDate }
+            changeDeparturelDate = { this.handleChangeDepartureDate }
+            returnDate = { this.state.returnDate }
+            changeReturnDate = { this.handleChangeReturnDate }
+          />
+          <TravellersList
+            travellers = { this.state.travellersDelivery }
+          />
+          <button onClick = { this.resetData }>Borrar Cursos</button>
+        </div>
+      )
+    }
   }
 }
 export default App

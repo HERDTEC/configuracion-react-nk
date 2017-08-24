@@ -1,10 +1,25 @@
 import React from 'react'
+import uid from 'uid'
+import DatePicker from 'react-datepicker'
+import 'react-datepicker/dist/react-datepicker.css'
 const TravelNew = ( props ) => (
   <form onSubmit = { props.onAddTravel }>
-    <input type = 'text' placeholder = 'Ciudad de Origen' name = 'ciudadOrigen' />
-    <input type = 'date' placeholder = 'Fecha Salida' name = 'fechaSalida' />
-    <input type = 'date' placeholder = 'Fecha de Retorno' name = 'fechaRetorno' />
-    <input type = 'hidden' name = 'id' value = { Math.floor( Math.random() * 100 ) } />
+    <input type = 'text' placeholder = 'city de Origen' name = 'hometown' />
+    <DatePicker
+      isClearable = { true }
+      placeholderText = 'Fecha Salida'
+      name = 'departureDate'
+      selected = { props.departureDate }
+      onChange = { props.changeDeparturelDate }
+    />
+    <DatePicker
+      isClearable = { true }
+      placeholderText = 'Fecha de Retorno'
+      name = 'returnDate'
+      selected = { props.returnDate }
+      onChange = { props.changeReturnDate }
+    />
+    <input type = 'hidden' name = 'id' value = { uid( 10 ) } />
     <input type = 'submit' value = 'Guardar' />
   </form>
 )

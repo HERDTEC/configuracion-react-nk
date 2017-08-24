@@ -3,3 +3,5 @@ yarn eslint eslint-config-standard eslint-plugin-import eslint-plugin-node eslin
 cp ./.config-fold/.eslintignore .eslintignore
 cp ./.config-fold/.eslintrc .eslintrc
 yarn install
+yarn install add ui
+yarn add react-datepicker

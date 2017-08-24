@@ -1,0 +1,56 @@
+{
+  "travellersDelivery": [{
+    "id": 0,
+    "user": {
+      "name": "Juan Carlos",
+      "lastName": "Hinojosa Raza",
+      "identityCard": "17282444323",
+      "qualification": {
+        "punctuality": "10",
+        "averageRating": "10"
+      }
+    },
+    "itinerary": [
+      {
+        "city": "Francia",
+        "arrivalDate": "2017/10/8",
+        "departureDate": "2017/10/15"
+      },
+      {
+        "city": "Espania",
+        "arrivalDate": "2018/12/16",
+        "departureDate": "2018/12/29"
+      }
+    ],
+    "hometown": "Quito2",
+    "departureDate": "2017/10/7",
+    "returnDate": "2017/10/30"
+  },
+  {
+    "id": 1,
+    "user": {
+      "name": "Juan Carlos",
+      "lastName": "Hinojosa Raza",
+      "identityCard": "17282444323",
+      "qualification": {
+        "punctuality": "10",
+        "averageRating": "10"
+      }
+    },
+    "itinerary": [
+      {
+        "city": "Francia",
+        "arrivalDate": "2017/10/8",
+        "departureDate": "2017/10/15"
+      },
+      {
+        "city": "Espania",
+        "arrivalDate": "2018/12/16",
+        "departureDate": "2018/12/29"
+      }
+    ],
+    "hometown": "Guayaquil",
+    "departureDate": "2017/10/7",
+    "returnDate": "2017/10/30"
+  }]
+}

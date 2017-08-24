@@ -6,17 +6,17 @@ import uid from 'uid'
 import { travellersDelivery } from './../data/travellersDelivery.json'
 import moment from 'moment'
 class App extends Component {
-  static defaultProps = {
-    id: uid( 10 ),
-    hometown: 'defecto',
-    returnDate: moment(),
-    departureDate: moment()
-  }
   static propTypes = {
     id: PropTypes.string.isRequired,
     hometown: PropTypes.string.isRequired,
-    departureDate: PropTypes.instanceOf( moment ),
-    returnDate: PropTypes.instanceOf( moment )
+    departureDate: PropTypes.instanceOf( moment ).isRequired,
+    returnDate: PropTypes.instanceOf( moment ).isRequired
+  }
+  static defaultProps = {
+    id: uid( 10 ),
+    hometown: 'defecto',
+    returnDate: moment().locale( 'es' ),
+    departureDate: moment().locale( 'es' )
   }
   constructor ( ...props ) {
     super( ...props )
@@ -37,11 +37,6 @@ class App extends Component {
   resetData () {
     this.setState( { travellersDelivery: [] } )
   }
-  componentDidMount () {
-    this.fetchData()
-    // this.handleChangeDepartureDate( moment() )
-    // this.handleChangereturnDate( moment() )
-  }
   handleChangeDepartureDate ( date ) {
     this.setState( {
       departureDate: date
@@ -52,21 +47,23 @@ class App extends Component {
       returnDate: date
     } )
   }
-
   handleOnAddTravel ( e ) {
     e.preventDefault()
-    console.log( e.target )
-    let form = e.target,
-      travel = {
-        id: form.id.value,
-        hometown: ( form.hometown.value ) ? form.hometown.value : App.defaultProps.hometown,
-        departureDate: ( form.departureDate.value ) ? form.departureDate.value : App.defaultProps.departureDate,
-        returnDate: ( form.returnDate.value ) ? form.returnDate.value : App.defaultProps.returnDate
-      }
+    let form = e.target, travel = {
+      id: form.id.value,
+      hometown: ( form.hometown.value ) ? form.hometown.value : App.defaultProps.hometown,
+      departureDate: ( form.departureDate.value ) ? form.departureDate.value : App.defaultProps.departureDate.format( 'DD/MM/YYYY' ),
+      returnDate: ( form.returnDate.value ) ? form.returnDate.value : App.defaultProps.returnDate.format( 'DD/MM/YYYY' )
+    }
     console.log( travel )
     this.setState( {
       travellersDelivery: this.state.travellersDelivery.concat( [travel] )
     } )
+  }
+  componentDidMount () {
+    this.fetchData()
+    this.handleChangeDepartureDate( moment() )
+    this.handleChangeReturnDate( moment() )
   }
   render () {
     if ( !this.state.travellersDelivery.length ) {

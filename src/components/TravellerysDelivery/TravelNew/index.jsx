@@ -6,6 +6,7 @@ const TravelNew = ( props ) => (
   <form onSubmit = { props.onAddTravel }>
     <input type = 'text' placeholder = 'city de Origen' name = 'hometown' />
     <DatePicker
+      dateFormat = 'DD/MM/YYYY'
       isClearable = { true }
       placeholderText = 'Fecha Salida'
       name = 'departureDate'
@@ -13,6 +14,7 @@ const TravelNew = ( props ) => (
       onChange = { props.changeDeparturelDate }
     />
     <DatePicker
+      dateFormat = 'DD/MM/YYYY'
       isClearable = { true }
       placeholderText = 'Fecha de Retorno'
       name = 'returnDate'

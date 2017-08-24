@@ -44,11 +44,53 @@ const Servicios = () => (
     <h1>Servicios</h1>
   </div>
 )
-const Contacto = () => (
+const CompContacto = () => (
   <div>
-    <h1>Contacto</h1>
+    <h2>Mantente en contacto </h2>
   </div>
 )
+const CompMail = () => (
+  <div>
+    <h2>sistemas@linkear.net </h2>
+  </div>
+)
+const CompUbicacion = () => (
+  <div>
+    <h2>Quito</h2>
+  </div>
+)
+const CompWww = () => (
+  <div>
+    <h2>ing.pc.com</h2>
+  </div>
+)
+const CompContactoInfo = ( { match } ) => (
+  <div>
+    <h2>{ match.params.contactoInfo }</h2>
+  </div>
+)
+const Contacto = ( { match } ) => (
+  <div>
+    <h1>Contacto</h1>
+    <Route exact path = { `${ match.url }` } component = { CompContacto } />
+    <ul>
+      <li>
+        <Link to = { `${ match.url }/email` }>Email</Link>
+      </li>
+      <li>
+        <Link to = { `${ match.url }/ubicacion` }>Ubicacion</Link>
+      </li>
+      <li>
+        <Link to = { `${ match.url }/miweb` }>miweb</Link>
+      </li>
+    </ul>
+    <Route exact path = { `${ match.url }/:contactoInfo` } component = { CompContactoInfo } />
+    <Route exact path = { `${ match.url }/email` } component = { CompMail } />
+    <Route exact path = { `${ match.url }/ubicacion` } component = { CompUbicacion } />
+    <Route exact path = { `${ match.url }/miweb` } component = { CompWww } />
+  </div>
+)
+
 export default Router
 export {
   Router,
